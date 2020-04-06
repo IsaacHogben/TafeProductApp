@@ -29,6 +29,8 @@ namespace ProductApps
 
         private void calculateButton_Click(object sender, RoutedEventArgs e)
         {
+            decimal total;
+            double GST;
             try
             {
                 cProduct = new Product(Convert.ToDecimal(priceTextBox.Text), Convert.ToInt16(quantityTextBox.Text));
@@ -36,8 +38,9 @@ namespace ProductApps
                 totalPaymentTextBlock.Text = Convert.ToString(cProduct.TotalPayment);
                 totalChargeTextBlock.Text = Convert.ToString(cProduct.TotalPayment + 25);
                 totalChargeWithWrapTextBlock.Text = Convert.ToString(cProduct.TotalPayment + 25 + 5);
-
-
+                total = cProduct.TotalPayment + 25 + 5;
+                GST = decimal.ToDouble(total) * 1.1;
+                totalChargeWithGSTTextBlock.Text = Convert.ToString(GST);
             }
             catch (FormatException)
             {
@@ -52,6 +55,8 @@ namespace ProductApps
             quantityTextBox.Text = "";
             totalPaymentTextBlock.Text = "";
             totalChargeTextBlock.Text = "";
+            totalChargeWithWrapTextBlock.Text = "";
+            totalChargeWithGSTTextBlock.Text = "";
 
         }
 
